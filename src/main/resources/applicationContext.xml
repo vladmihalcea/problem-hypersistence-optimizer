@@ -25,13 +25,13 @@
         </property>
     </bean>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-    	<property name="dataSource" ref="dataSource" />
-    	<property name="packagesToScan">
-		     <list>
-                 <value>org.example.hypersistence</value>
-		     </list>
-	    </property>
+    <bean id="originalSessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="packagesToScan">
+            <list>
+                <value>org.example.hypersistence</value>
+            </list>
+        </property>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
@@ -41,6 +41,12 @@
         <property name="bootstrapExecutor">
             <bean class="org.springframework.core.task.SimpleAsyncTaskExecutor" />
         </property>
+    </bean>
+
+    <bean id="sessionFactory"
+          factory-bean="originalSessionFactory"
+          factory-method="getWrappedObject"
+          primary="true">
     </bean>
 
     <bean id="hypersistenceOptimizer" class="io.hypersistence.optimizer.HypersistenceOptimizer">
