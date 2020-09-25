@@ -1,0 +1,11 @@
+<!DOCTYPE aspectj PUBLIC "-//AspectJ//DTD//EN" "http://www.eclipse.org/aspectj/dtd/aspectj.dtd">
+<aspectj>
+
+    <!-- https://www.eclipse.org/aspectj/doc/next/devguide/ltw-configuration.html -->
+
+    <weaver>
+        <!-- only weave classes in our application-specific packages -->
+        <include within="org.example.hypersistence..*"/>
+    </weaver>
+
+</aspectj>
